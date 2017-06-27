@@ -39,6 +39,8 @@ import java.util.List;
 public class GuiAnalyser extends Gui
 {
 	private static GuiAnalyser gui;
+	int offsetX = 0;
+	int offsetY = 0;
 
 	@SubscribeEvent
 	public static void onIngameOverlay(RenderGameOverlayEvent.Post event)
@@ -80,26 +82,36 @@ public class GuiAnalyser extends Gui
 		}
 	}
 
-	public static int getStartX(ScaledResolution res)
+	public int getStartX(ScaledResolution res)
 	{
 		switch(AnimaConfig.guiCorner)
 		{
 			case 1:
+				offsetX = (int)xMax + (int)(xMax / 5);
+				offsetY = 0;
 				return res.getScaledWidth();
 			case 3:
+				offsetX = (int)xMax + (int)(xMax / 5);
+				offsetY = (int)yMax - (int)(yMax / 7);
 				return res.getScaledWidth();
 			default:
+				offsetX = 0;
+				offsetY = 0;
 				return 0;
 		}
 	}
 
-	public static int getStartY(ScaledResolution res)
+	public int getStartY(ScaledResolution res)
 	{
 		switch(AnimaConfig.guiCorner)
 		{
 			case 2:
+				offsetY = (int)yMax - (int)(yMax / 7);
+				offsetX = 0;
 				return res.getScaledHeight();
 			case 3:
+				offsetY = (int)yMax - (int)(yMax / 7);
+				offsetX = (int)xMax + (int)(xMax / 5);
 				return res.getScaledHeight();
 			default:
 				return 20;
@@ -244,7 +256,8 @@ public class GuiAnalyser extends Gui
 
 		if(shouldDrawInfo())
 		{
-			drawInfo(mc, te, startX, startY);
+			drawInfo(mc, te, startX - offsetX, startY - offsetY
+			);
 		}
 
 	}
