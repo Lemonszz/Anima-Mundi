@@ -15,10 +15,12 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import org.lwjgl.opengl.GL11;
 import party.lemons.anima.entity.EntityBlockSuck;
 
+import javax.annotation.Nullable;
+
 /**
  * Created by Sam on 21/06/2017.
  */
-public class RenderBlockSuck extends RenderEntity
+public class RenderBlockSuck extends Render<EntityBlockSuck>
 {
 	public static final RenderBlockSuckFactory FACTORY = new RenderBlockSuckFactory();
 
@@ -27,9 +29,8 @@ public class RenderBlockSuck extends RenderEntity
 		super(renderManagerIn);
 	}
 
-	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(EntityBlockSuck sucker, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		EntityBlockSuck sucker = (EntityBlockSuck) entity;
 		IBlockState renderState = sucker.getState();
 
 		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
@@ -56,14 +57,14 @@ public class RenderBlockSuck extends RenderEntity
 
 		if(renderState != null)
 		{
-			this.bindEntityTexture(entity);
+			this.bindEntityTexture(sucker);
 			blockrendererdispatcher.renderBlockBrightness(renderState, 1);
 		}
 		GlStateManager.disableBlend();
 		GlStateManager.enableLighting();
 		GL11.glDisable(GL11.GL_BLEND);
 
-		if (((EntityBlockSuck) entity).getTime() / 2 % 2 == 0)
+		if (sucker.getTime() / 2 % 2 == 0)
 		{
 			GlStateManager.disableLighting();
 			GlStateManager.enableBlend();
@@ -80,18 +81,20 @@ public class RenderBlockSuck extends RenderEntity
 		GlStateManager.popMatrix();
 	}
 
-	public static class RenderBlockSuckFactory implements IRenderFactory<Entity>
-	{
-		@Override
-		public Render<? super Entity> createRenderFor(RenderManager manager) {
-			return new RenderBlockSuck(manager);
-		}
-
-	}
-
-	protected ResourceLocation getEntityTexture(EntityTNTPrimed entity)
+	@Nullable
+	@Override
+	protected ResourceLocation getEntityTexture(EntityBlockSuck entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
 
+	public static class RenderBlockSuckFactory implements IRenderFactory<EntityBlockSuck>
+	{
+		@Override
+		public Render<? super EntityBlockSuck>  createRenderFor(RenderManager manager)
+		{
+			return new RenderBlockSuck(manager);
+		}
+
+	}
 }
