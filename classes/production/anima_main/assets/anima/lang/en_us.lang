@@ -40,3 +40,4 @@ tile.anima:dark_anima_brick.name=Dark Anima Brick
 tile.anima:buffered_inserter.name=Buffered Inserter
 tile.anima:solar_collector.name=Solar Collector
 tile.anima:lunar_collector.name=Lunar Collector
+tile.anima:anima_generator.name=Anima Generator
