@@ -58,3 +58,4 @@ public class GuiSorter extends GuiContainer
 		return sorter.getTile().getColourForSide(facing).getRGB();
 	}
 }
+
