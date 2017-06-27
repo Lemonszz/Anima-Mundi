@@ -23,7 +23,7 @@ public abstract class ParticleGlowBase extends Particle
 	{
 		super(world, x, y, z, velocityX, velocityY, velocityZ);
 
-		this.particleAlpha = 0.99F;
+		this.particleAlpha = 0.90F;
 		motionX = velocityX;
 		motionY = velocityY;
 		motionZ = velocityZ;
@@ -57,8 +57,10 @@ public abstract class ParticleGlowBase extends Particle
 	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
 	{
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+
 		super.renderParticle(buffer, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
 		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+
 	}
 
 	protected void updateColour()
