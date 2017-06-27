@@ -172,7 +172,6 @@ public class TileEntitySorter extends TileEntityLinkableWorker
 		{
 			NodeLink link = nextLink();
 			boolean isDefault = link.getOutputSide().ordinal() == defaultSort;
-			System.out.println(isDefault + " " +  (nodeIndex -1) );
 
 			if(canLinkTo(world, link.getLinkPos(), link.getOutputSide(), false))
 			{

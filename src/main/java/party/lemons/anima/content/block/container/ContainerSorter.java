@@ -90,11 +90,7 @@ public class ContainerSorter extends Container
 
 				if(!player.isSneaking())
 				{
-
 					te.incrementDefaultSort();
-
-					System.out.println(te.getDefaultSort());
-
 				}
 				else
 				{
@@ -114,9 +110,7 @@ public class ContainerSorter extends Container
 		}
 		catch(ArrayIndexOutOfBoundsException e)
 		{
-			System.out.println("FAILED");
 			return super.slotClick(slotId, dragType, clickTypeIn, player);
-
 		}
 		return ItemStack.EMPTY;
 	}
