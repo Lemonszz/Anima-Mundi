@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "anima:destroyer" },
+        "facing=south": { "model": "anima:destroyer", "y": 180 },
+        "facing=west":  { "model": "anima:destroyer", "y": 270 },
+        "facing=east":  { "model": "anima:destroyer", "y": 90 }
+    }
+}

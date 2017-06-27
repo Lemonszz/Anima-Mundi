@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "anima:items/dark_anima_shard"
+    }
+}

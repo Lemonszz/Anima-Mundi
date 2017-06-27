@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "anima:sorter",
+	"count": 1
+  },
+  "pattern": [
+    "CAC",
+    "CNC",
+    "AAA"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore" : "cobblestone"
+    },
+    "A": {
+      "item": "anima:dark_anima_shard"
+    },
+    "N": {
+      "type": "forge:ore_dict",
+      "ore" : "chestWood"
+    }
+  }
+}

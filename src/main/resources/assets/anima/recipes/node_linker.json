@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "anima:linker"
+  },
+  "pattern": [
+    "SAS",
+    " S ",
+    " S "
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore" : "stickWood"
+    },
+    "A": {
+      "item": "anima:anima_shard"
+    }
+  }
+}

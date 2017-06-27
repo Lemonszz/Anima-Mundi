@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "crystal_anima_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "anima:crystal_anima_shard"
+    }
+  },
+  "result": {
+    "item": "anima:crystal_anima_block"
+  }
+}

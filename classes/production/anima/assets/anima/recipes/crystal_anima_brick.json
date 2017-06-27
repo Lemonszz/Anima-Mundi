@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "crystal_anima_brick",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "anima:crystal_anima_block"
+    }
+  },
+  "result": {
+    "item": "anima:crystal_anima_brick",
+	"count": 4
+  }
+}

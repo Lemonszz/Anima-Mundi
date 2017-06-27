@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "anima:extractor",
+	"count": 1
+  },
+  "pattern": [
+    "ISI",
+    "ADA",
+    "IAI"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+	"I": {
+      "type": "forge:ore_dict",
+      "ore" : "ingotIron"
+    },
+    "A": {
+      "item": "anima:dark_anima_shard"
+    },
+	"D": {
+	  "item": "minecraft:diamond_pickaxe"
+	},
+	"S":{
+	  "item": "anima:inserter"
+	}
+  }
+}

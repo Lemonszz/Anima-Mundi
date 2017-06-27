@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "anima:inserter",
+	"count": 1
+  },
+  "pattern": [
+    "CCC",
+    "CNC",
+    "CAC"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore" : "cobblestone"
+    },
+    "A": {
+      "item": "anima:anima_shard"
+    },
+	"N":{
+	  "item": "anima:linknode"
+	}
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "anima:destroyer",
+	"count": 1
+  },
+  "pattern": [
+    "IAI",
+    "ASA",
+    "IAI"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+	"I": {
+      "type": "forge:ore_dict",
+      "ore" : "ingotIron"
+    },
+    "A": {
+      "item": "anima:dark_anima_shard"
+    },
+	"S":{
+	  "item": "anima:inserter"
+	}
+  }
+}

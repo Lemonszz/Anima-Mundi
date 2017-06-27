@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "anima:buffered_inserter",
+	"count": 1
+  },
+  "pattern": [
+    "AAA",
+    "ANA",
+    "AAA"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "A": {
+      "item": "anima:dark_anima_shard"
+    },
+    "N": {
+      "item" : "anima:inserter"
+    }
+  }
+}

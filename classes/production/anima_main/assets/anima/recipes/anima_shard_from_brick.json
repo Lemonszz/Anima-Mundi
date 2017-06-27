@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "anima_shard",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "anima:anima_brick"
+    }
+  },
+  "result": {
+    "item": "anima:anima_shard",
+    "count": 9
+  }
+}
