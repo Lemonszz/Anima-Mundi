@@ -51,7 +51,6 @@ public class GuiSorter extends GuiContainer
 		}
 	}
 
-	//TODO: move this with the other sorter colour stuff
 	private int colourForDefaultSort(int sort)
 	{
 		EnumFacing facing = EnumFacing.values()[sort];

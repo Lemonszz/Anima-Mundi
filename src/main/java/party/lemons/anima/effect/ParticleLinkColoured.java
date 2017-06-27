@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import party.lemons.anima.config.ModConstants;
+import party.lemons.anima.util.BlockUtil;
 
 /**
  * Created by Sam on 20/06/2017.
@@ -83,20 +84,16 @@ public class ParticleLinkColoured extends Particle
 		prevPosY = posY;
 		prevPosZ = posZ;
 
-		move(motionX, motionY, motionZ);  // simple linear motion.  You can change speed by changing motionX, motionY,
-		// motionZ every tick.  For example - you can make the particle accelerate downwards due to gravity by
-		// final double GRAVITY_ACCELERATION_PER_TICK = -0.02;
-		// motionY += GRAVITY_ACCELERATION_PER_TICK;
-
-		// collision with a block makes the ball disappear.  But does not collide with entities
+		move(motionX, motionY, motionZ);
 		BlockPos currentPos = new BlockPos(this.posX, this.posY, this.posZ);
 
-		//TODO: clean
-		if (currentPos.getY() == target.getY() && currentPos.getX() == target.getX() && currentPos.getZ() == target.getZ()) {  // isCollided is only true if the particle collides while it is moving downwards...
+		if(BlockUtil.isSamePosition(currentPos, target))
+		{
 			this.setExpired();
 		}
 
-		if (prevPosY == posY && motionY > 0) {  // detect a collision while moving upwards (can't move up at all)
+		if (prevPosY == posY && motionY > 0)
+		{
 			this.setExpired();
 		}
 
