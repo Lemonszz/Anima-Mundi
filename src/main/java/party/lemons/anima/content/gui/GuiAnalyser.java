@@ -76,7 +76,7 @@ public class GuiAnalyser extends Gui
 	@SubscribeEvent
 	public static void renderTick(TickEvent.ClientTickEvent event)
 	{
-		if(gui != null)
+		if(gui != null && Minecraft.getMinecraft().world != null)
 		{
 			gui.update();
 		}

@@ -2,6 +2,7 @@ package party.lemons.anima.content.block.tileentity;
 
 import net.minecraft.client.Minecraft;
 import party.lemons.anima.effect.ParticleGlow;
+import party.lemons.anima.energy.WorldEnergy;
 
 /**
  * Created by Sam on 26/06/2017.
@@ -22,7 +23,8 @@ public class TileEntitySolarCollector extends TileEntityLinkableWorker
 	@Override
 	public void work()
 	{
-		animaStorage.receiveEnergy(5, false);
+		int amt = WorldEnergy.drainEnergy(world, 2);
+		animaStorage.receiveEnergy(amt, false);
 
 		if(world.isRemote)
 		{

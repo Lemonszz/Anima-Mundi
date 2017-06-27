@@ -22,7 +22,7 @@ public class Anima
 	@SidedProxy(clientSide = "party.lemons.anima.proxy.ClientProxy", serverSide = "party.lemons.anima.proxy.ServerProxy")
 	public static CommonProxy Proxy;
 
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModConstants.MODID);
+	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(ModConstants.MODID);
 
 	@Mod.EventHandler
 	public void OnPreInit(FMLPreInitializationEvent event)
