@@ -16,7 +16,7 @@ import party.lemons.anima.network.PacketSendWorldEnergy;
 public class WorldEnergy extends WorldSavedData
 {
 	private static final String NAME = ModConstants.MODID + ":anima";
-	private static final int ANIMA_START = 	25; //5 million anima
+	private static final int ANIMA_START = 	5000000; //5 million anima
 	private static final int ANIMA_MAX = 	5000000; //5 million anima
 
 	private int anima = ANIMA_START;
