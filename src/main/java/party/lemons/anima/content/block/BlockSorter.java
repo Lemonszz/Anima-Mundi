@@ -39,7 +39,7 @@ public class BlockSorter extends BlockAnima implements ILinkable
 		{
 			return false;
 		}
-		
+
 		TileEntity te = world.getTileEntity(pos);
 
 		if (!(te instanceof TileEntitySorter))

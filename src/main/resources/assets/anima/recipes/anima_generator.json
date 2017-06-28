@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "anima_generator",
+  "pattern": [
+    "#I#",
+    "#F#",
+    "III"
+  ],
+  "key": {
+    "#": {
+      "item": "anima:dark_anima_shard"
+    },
+    "F":{
+      "item": "minecraft:furnace"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore" : "ingotIron"
+    }
+  },
+  "result": {
+    "item": "anima:anima_generator"
+  }
+}

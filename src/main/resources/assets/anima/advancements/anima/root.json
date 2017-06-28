@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "anima:linker"
+    },
+    "title": {
+      "translate": "anima:advancements.anima.root.title"
+    },
+    "description": {
+      "translate": "anima:advancements.anima.root.description"
+    },
+    "background": "anima:textures/gui/advancements/dark_anima_block.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "crafting_table": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "dimension": "overworld"
+      }
+    }
+  }
+}

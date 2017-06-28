@@ -62,7 +62,7 @@ public class WorldEnergy extends WorldSavedData
 
 	public int getAnima()
 	{
-		return anima;
+		return 5000000;//anima;
 	}
 
 	public void setAnima(int anima, World world)
