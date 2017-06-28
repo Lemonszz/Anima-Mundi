@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.crafting.AnimaTab;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sam on 20/06/2017.
  */
@@ -51,21 +53,22 @@ public class AnimaItems
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event)
 	{
+		items.forEach(item->generalRegisterModel(item));
 		initSpecialModels();
-
-		//TODO: move to foreach
-		generalRegisterModel(ANIMA_SHARD);
-		generalRegisterModel(CRYSTAL_ANIMA_SHARD);
-		generalRegisterModel(DARK_ANIMA_SHARD);
-		generalRegisterModel(LINK_ANALYSER);
 	}
 
-	public static void generalRegisterItem(String name, Item item)
+	private static ArrayList<Item> items = new ArrayList<>();
+
+	public static void generalRegisterItem(String name, Item item, boolean genericModel)
 	{
 		item.setUnlocalizedName(ModConstants.MODID + ":" + name);
 		item.setRegistryName(name);
 		item.setCreativeTab(AnimaTab.Tab);
+
+		if(genericModel)
+			items.add(item);
 	}
+
 
 	public static void generalRegisterModel(Item item)
 	{

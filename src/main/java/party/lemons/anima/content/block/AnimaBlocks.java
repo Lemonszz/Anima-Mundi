@@ -111,23 +111,24 @@ public class AnimaBlocks
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
-		for (Block block : blocks)
-		{
-			event.getRegistry().register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
-		}
+		blocks.forEach(block -> event.getRegistry().register(new ItemBlock(block).setRegistryName(block.getRegistryName())));
 	}
 
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event)
 	{
-		for (Block block : blocks)
-		{
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
-		}
+		blocks.forEach(
+				block->ModelLoader.setCustomModelResourceLocation(
+						Item.getItemFromBlock(block),
+						0,
+						new ModelResourceLocation(block.getRegistryName(), "inventory"))
+		);
+
 	}
 
 	private static void registerTileEntities()
 	{
+		//Hrmmmm
 		registerTileEntity(TileEntityExtractor.class, ModConstants.MODID + ":extractor");
 		registerTileEntity(TileEntityDestroyer.class, ModConstants.MODID + ":destroyer");
 		registerTileEntity(TileEntityLinkNode.class, ModConstants.MODID + ":linknode");

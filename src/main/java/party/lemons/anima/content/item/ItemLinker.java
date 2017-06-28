@@ -23,7 +23,7 @@ public class ItemLinker extends Item
 	public ItemLinker()
 	{
 		this.setMaxStackSize(1);
-		AnimaItems.generalRegisterItem("linker", this);
+		AnimaItems.generalRegisterItem("linker", this, false);
 	}
 
 	@Override

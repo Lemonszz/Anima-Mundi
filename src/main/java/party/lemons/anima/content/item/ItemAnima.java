@@ -9,6 +9,6 @@ public class ItemAnima extends Item
 {
 	public ItemAnima(String name)
 	{
-		AnimaItems.generalRegisterItem(name, this);
+		AnimaItems.generalRegisterItem(name, this, true);
 	}
 }
