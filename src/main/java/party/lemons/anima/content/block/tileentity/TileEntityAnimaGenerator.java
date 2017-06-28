@@ -2,6 +2,7 @@ package party.lemons.anima.content.block.tileentity;
 
 import net.minecraft.item.ItemStack;
 import party.lemons.anima.crafting.AnimaGeneratorRecipes;
+import party.lemons.anima.energy.WorldEnergy;
 
 /**
  * Created by Sam on 27/06/2017.
@@ -22,7 +23,6 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 	@Override
 	public void work()
 	{
-		ItemStack burnStack = ItemStack.EMPTY;
 		int amount = 0;
 		for(int i = 0; i < items.getSlots(); i++)
 		{
@@ -43,6 +43,9 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 
 	public void burnItem(ItemStack stack)
 	{
-		animaStorage.receiveEnergy(AnimaGeneratorRecipes.getValue(stack.getItem()), false);
+		int value = AnimaGeneratorRecipes.getValue(stack.getItem());
+
+		WorldEnergy.drainEnergy(world, value / 4);
+		animaStorage.receiveEnergy(value, false);
 	}
 }
