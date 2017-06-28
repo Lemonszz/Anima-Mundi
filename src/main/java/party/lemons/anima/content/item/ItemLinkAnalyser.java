@@ -8,5 +8,6 @@ public class ItemLinkAnalyser extends ItemAnima
 	public ItemLinkAnalyser()
 	{
 		super("link_analyser");
+		this.setMaxStackSize(1);
 	}
 }
