@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "anima:blocks/anima_brick"
-    }
-}

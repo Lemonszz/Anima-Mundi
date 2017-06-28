@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "anima:blocks/extractor_side",
-        "front": "anima:blocks/destroyer_front",
-        "side": "anima:blocks/extractor_side"
-    }
-}
