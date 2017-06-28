@@ -128,34 +128,7 @@ public class GuiAnalyser extends Gui
 			GlStateManager.disableDepth();
 			float tooltipTextWidth = maxWidth;
 
-			boolean needsWrap = false;
-
-			int titleLinesCount = 1;
 			float tooltipX = mouseX + 12;
-			if (tooltipX + tooltipTextWidth + 4 > screenWidth)
-			{
-				tooltipX = mouseX - 16 - tooltipTextWidth;
-				if (tooltipX < 4) // if the tooltip doesn't fit on the screen
-				{
-					if (mouseX > screenWidth / 2)
-					{
-						tooltipTextWidth = mouseX - 12 - 8;
-					}
-					else
-					{
-						tooltipTextWidth = screenWidth - 16 - mouseX;
-					}
-					needsWrap = true;
-				}
-			}
-
-			if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth)
-			{
-				tooltipTextWidth = maxTextWidth;
-				needsWrap = true;
-			}
-
-
 			float tooltipY = mouseY - 12;
 			float tooltipHeight = lines;
 
@@ -166,6 +139,7 @@ public class GuiAnalyser extends Gui
 
 			final int zLevel = 300;
 			final int backgroundColor = 0xF0100010;
+
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY - 4, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY - 3, backgroundColor, backgroundColor);
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY + (int)tooltipHeight + 3, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY + (int)tooltipHeight + 4, backgroundColor, backgroundColor);
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY - 3, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY + (int)tooltipHeight + 3, backgroundColor, backgroundColor);
@@ -178,9 +152,9 @@ public class GuiAnalyser extends Gui
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY - 3, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY - 3 + 1, borderColorStart, borderColorStart);
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY +(int)tooltipHeight + 2, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY + (int)tooltipHeight + 3, borderColorEnd, borderColorEnd);
 
-			GlStateManager.enableLighting();
+			//GlStateManager.enableLighting();
 			GlStateManager.enableDepth();
-			RenderHelper.enableStandardItemLighting();
+			//RenderHelper.enableStandardItemLighting();
 			GlStateManager.enableRescaleNormal();
 		}
 	}
@@ -244,16 +218,12 @@ public class GuiAnalyser extends Gui
 		Minecraft mc = Minecraft.getMinecraft();
 
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-		ILinkableTile linkableTile = getDrawLinkTile(mc);
 		TileEntity te = getDrawTile(mc);
 		int startX = getStartX(res);
 		int startY = getStartY(res);
 
-
-
 		lastTicks = partialTicks;
 		drawBackground(ySize, xSize, startX, startY, res.getScaledWidth(), res.getScaledHeight(), 300, mc.fontRenderer);
-
 		if(shouldDrawInfo())
 		{
 			drawInfo(mc, te, startX - offsetX, startY - offsetY
