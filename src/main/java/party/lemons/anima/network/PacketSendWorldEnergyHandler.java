@@ -14,12 +14,12 @@ public class PacketSendWorldEnergyHandler implements IMessageHandler<PacketSendW
 	@Override
 	public IMessage onMessage(PacketSendWorldEnergy message, MessageContext ctx)
 	{
-		if(Minecraft.getMinecraft().world == null)
-			return null;
+		Minecraft.getMinecraft().addScheduledTask(() ->
+		{
+			WorldEnergy energy = WorldEnergy.get(Minecraft.getMinecraft().world);
+			energy.setAnima(message.amt, Minecraft.getMinecraft().world);
+		});
 
-
-		WorldEnergy energy = WorldEnergy.get(Minecraft.getMinecraft().world);
-		energy.setAnima(message.amt, Minecraft.getMinecraft().world);
 		return null;
 	}
 }

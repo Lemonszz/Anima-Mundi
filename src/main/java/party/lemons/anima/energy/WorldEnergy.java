@@ -94,6 +94,11 @@ public class WorldEnergy extends WorldSavedData
 		return animaTaken;
 	}
 
+	public static boolean canHasAnyEnergy(World world)
+	{
+		WorldEnergy energy = get(world);
+		return energy.getAnima() > 0;
+	}
 
 	public static void syncWith(EntityPlayer player)
 	{

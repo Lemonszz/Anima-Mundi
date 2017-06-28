@@ -17,7 +17,7 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 	@Override
 	public boolean canWork()
 	{
-		return !isEmpty() && animaStorage.receiveEnergy(1, true) >= 1;
+		return !isEmpty() && animaStorage.receiveEnergy(1, true) >= 1 && WorldEnergy.canHasAnyEnergy(world);
 	}
 
 	@Override

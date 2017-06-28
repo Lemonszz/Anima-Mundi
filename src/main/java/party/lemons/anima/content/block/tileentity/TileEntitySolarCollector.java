@@ -17,7 +17,7 @@ public class TileEntitySolarCollector extends TileEntityLinkableWorker
 	@Override
 	public boolean canWork()
 	{
-		return world.canBlockSeeSky(pos.up()) && world.getWorldTime() % 24000L < 12500 && animaStorage.receiveEnergy(1, true) > 0;
+		return world.canBlockSeeSky(pos.up()) && world.getWorldTime() % 24000L < 12500 && animaStorage.receiveEnergy(1, true) > 0  && WorldEnergy.canHasAnyEnergy(world);
 	}
 
 	@Override
