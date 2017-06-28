@@ -39,11 +39,7 @@ public class BlockSorter extends BlockAnima implements ILinkable
 		{
 			return false;
 		}
-
-		if (world.isRemote) {
-			return true;
-		}
-
+		
 		TileEntity te = world.getTileEntity(pos);
 
 		if (!(te instanceof TileEntitySorter))

@@ -1,6 +1,12 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "anima:blocks/placeholder"
+        "particle": "anima:blocks/anima_generator_side",
+        "north": "anima:blocks/anima_generator_side",
+        "south": "anima:blocks/anima_generator_side",
+        "east": "anima:blocks/anima_generator_side",
+        "west": "anima:blocks/anima_generator_side",
+        "up": "anima:blocks/anima_generator_top",
+		"down": "anima:blocks/dark_anima_block"
     }
 }

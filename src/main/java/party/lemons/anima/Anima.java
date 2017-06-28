@@ -5,8 +5,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import party.lemons.anima.command.CommandAnima;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.proxy.CommonProxy;
 
@@ -40,5 +42,12 @@ public class Anima
 	public void OnPostInit(FMLPostInitializationEvent event)
 	{
 		Proxy.OnPostInit(event);
+	}
+
+	@Mod.EventHandler
+	public void serverLoad(FMLServerStartingEvent event)
+	{
+		//TODO: Move this somewhere
+		event.registerServerCommand(new CommandAnima());
 	}
 }

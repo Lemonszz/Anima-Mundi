@@ -41,10 +41,11 @@ public class BlockAnimaGenerator extends BlockAnima implements ILinkable
 			return false;
 		}
 
+		/*
 		if (world.isRemote)
 		{
 			return true;
-		}
+		}*/
 
 		TileEntity te = world.getTileEntity(pos);
 
