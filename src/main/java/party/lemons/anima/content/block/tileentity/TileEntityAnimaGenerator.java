@@ -2,7 +2,6 @@ package party.lemons.anima.content.block.tileentity;
 
 import net.minecraft.item.ItemStack;
 import party.lemons.anima.crafting.AnimaGeneratorRecipes;
-import party.lemons.anima.energy.WorldEnergy;
 
 /**
  * Created by Sam on 27/06/2017.
@@ -17,7 +16,7 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 	@Override
 	public boolean canWork()
 	{
-		return !isEmpty() && animaStorage.receiveEnergy(1, true) >= 1 && WorldEnergy.canHasAnyEnergy(world);
+		return !isEmpty() && animaStorage.receiveEnergy(1, true) >= 1;
 	}
 
 	@Override
@@ -44,8 +43,6 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 	public void burnItem(ItemStack stack)
 	{
 		int value = AnimaGeneratorRecipes.getValue(stack.getItem());
-
-		WorldEnergy.drainEnergy(world, value / 4);
 		addEnergy(value);
 	}
 

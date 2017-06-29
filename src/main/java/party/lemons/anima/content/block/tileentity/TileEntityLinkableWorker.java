@@ -233,6 +233,11 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 		return true;
 	}
 
+	public boolean canSendItem(ItemStack stack)
+	{
+		return canSendItems();
+	}
+
 	@SideOnly(Side.CLIENT)
 	public Particle createLinkParticle(double xpos, double ypos, double zpos, double velocityX, double velocityY, double velocityZ, NodeLink link)
 	{
@@ -310,7 +315,7 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 				ItemStack sendStack = ItemStack.EMPTY;
 				for(int i = 0; i < items.getSlots(); i++)
 				{
-					if(!items.getStackInSlot(i).isEmpty())
+					if(!items.getStackInSlot(i).isEmpty() && canSendItem(items.getStackInSlot(i)))
 					{
 						sendStack = items.getStackInSlot(i);
 						items.extractItem(i, sendStack.getCount(), false);

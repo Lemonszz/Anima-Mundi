@@ -29,6 +29,18 @@ public class TileEntityCharger extends TileEntityLinkableWorker
 		return false;
 	}
 
+	@Override
+	public boolean canSendItem(ItemStack stack)
+	{
+		if(stack.isEmpty() || !(stack.getItem() instanceof ItemAnimaCharged))
+		{
+			return true;
+		}
+
+		ItemAnimaCharged it = (ItemAnimaCharged) stack.getItem();
+		return !(it.getCurrentCharge(stack) < it.getMaxCharge(stack));
+	}
+
 	private void increaseItem()
 	{
 		currentItem++;

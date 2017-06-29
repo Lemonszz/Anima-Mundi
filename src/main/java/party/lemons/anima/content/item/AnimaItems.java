@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.crafting.AnimaTab;
 import party.lemons.anima.energy.CapabilityAnima;
@@ -57,6 +59,7 @@ public class AnimaItems
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public static void registerModels(ModelRegistryEvent event)
 	{
 		items.forEach(item->generalRegisterModel(item));
@@ -75,12 +78,13 @@ public class AnimaItems
 			items.add(item);
 	}
 
-
+	@SideOnly(Side.CLIENT)
 	public static void generalRegisterModel(Item item)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
 
+	@SideOnly(Side.CLIENT)
 	private static void initSpecialModels()
 	{
 		ModelResourceLocation linker_off = new ModelResourceLocation(LINKER.getRegistryName(), "inventory");

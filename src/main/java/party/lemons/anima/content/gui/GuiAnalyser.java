@@ -6,37 +6,25 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderTooltipEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import party.lemons.anima.config.AnimaConfig;
+import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.content.block.tileentity.IAnalysable;
 import party.lemons.anima.content.block.tileentity.ILinkableTile;
-import party.lemons.anima.content.block.tileentity.TileEntityLinkableWorker;
 import party.lemons.anima.content.item.AnimaItems;
-import party.lemons.anima.energy.CapabilityAnima;
-import party.lemons.anima.energy.IAnimaStorage;
 import party.lemons.anima.util.EntityUtil;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Created by Sam on 26/06/2017.
  */
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = ModConstants.MODID)
 public class GuiAnalyser extends Gui
 {
 	private static GuiAnalyser gui;

@@ -11,6 +11,8 @@ anima.haslinkface=This face has already been linked.
 
 anima.info.cansendpower=Can send power
 anima.info.cannotsendpower=Can not send power
+anima.info.cansenditems=Can send items
+anima.info.cannotsenditems=Can not send items
 anima.info.storedpower=Stored Anima:
 anima.info.maxpower=Max Anima:
 anima.info.links=Links

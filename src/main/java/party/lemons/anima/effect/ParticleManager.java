@@ -6,11 +6,13 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import party.lemons.anima.config.ModConstants;
+import net.minecraftforge.fml.relauncher.Side;
+
 
 /**
  * Created by Sam on 20/06/2017.
  */
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ParticleManager
 {
 	@SubscribeEvent

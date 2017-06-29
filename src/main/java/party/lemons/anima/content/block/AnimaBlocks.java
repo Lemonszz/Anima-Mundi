@@ -10,6 +10,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.content.block.tileentity.*;
 import party.lemons.anima.crafting.AnimaTab;
@@ -119,6 +121,7 @@ public class AnimaBlocks
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public static void registerModels(ModelRegistryEvent event)
 	{
 		blocks.forEach(
