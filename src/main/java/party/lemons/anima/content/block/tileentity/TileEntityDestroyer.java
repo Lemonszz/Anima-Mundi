@@ -61,7 +61,7 @@ public class TileEntityDestroyer extends TileEntityLinkableWorker
 	{
 		if(!world.isRemote && canExtractEnergy())
 		{
-			extractEnergy();
+			extractWorkEnergy();
 			EntityBlockSuck e = new EntityBlockSuck(world, pos);
 			e.setState(getFrontState());
 

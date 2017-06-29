@@ -24,7 +24,7 @@ public class TileEntitySolarCollector extends TileEntityLinkableWorker
 	public void work()
 	{
 		int amt = WorldEnergy.drainEnergy(world, 2);
-		animaStorage.receiveEnergy(amt, false);
+		addEnergy(amt);
 
 		if(world.isRemote)
 		{

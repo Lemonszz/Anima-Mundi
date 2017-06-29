@@ -46,6 +46,6 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 		int value = AnimaGeneratorRecipes.getValue(stack.getItem());
 
 		WorldEnergy.drainEnergy(world, value / 4);
-		animaStorage.receiveEnergy(value, false);
+		addEnergy(value);
 	}
 }

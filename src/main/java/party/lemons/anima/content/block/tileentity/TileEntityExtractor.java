@@ -74,7 +74,7 @@ public class TileEntityExtractor extends TileEntityLinkableWorker
 				createParticles();
 			}
 
-			extractEnergy();
+			extractWorkEnergy();
 
 			BlockPos nextTop = getPos().down();
 

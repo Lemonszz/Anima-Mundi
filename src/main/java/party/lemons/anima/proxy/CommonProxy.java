@@ -12,6 +12,7 @@ import party.lemons.anima.Anima;
 import party.lemons.anima.config.AnimaConfig;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.content.worldgen.AnimaWorldGenerator;
+import party.lemons.anima.energy.CapabilityAnima;
 import party.lemons.anima.entity.EntityBlockSuck;
 import party.lemons.anima.entity.EntityNodeItem;
 import party.lemons.anima.network.PacketSendWorldEnergy;
@@ -27,16 +28,13 @@ public class CommonProxy implements IProxy
 		@Override
 		public void OnPreInit(FMLPreInitializationEvent e)
 		{
-			//Load config
-			Configuration config = new Configuration(e.getSuggestedConfigurationFile());
-			AnimaConfig.loadConfig(config);
-
 			//TODO: move these
 			int id = 1;
 			EntityRegistry.registerModEntity(new ResourceLocation(ModConstants.MODID + ":nodeitem"), EntityNodeItem.class, "nodeItem", id++, Anima.Instance, 64, 1, true);
 			EntityRegistry.registerModEntity(new ResourceLocation(ModConstants.MODID + ":blockSuck"), EntityBlockSuck.class, "blockSuck", id++, Anima.Instance, 64, 3, true);
 			GameRegistry.registerWorldGenerator(new AnimaWorldGenerator(), 0);
 
+			CapabilityAnima.register();
 		}
 
 		@Override

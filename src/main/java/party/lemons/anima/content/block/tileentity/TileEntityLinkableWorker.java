@@ -39,11 +39,6 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 	protected int suckTime, suckTimeMax, nodeIndex, particleTime, particleTimeMax;
 	protected final int MAX_SEND_ENERGY = 20;
 
-	/*public TileEntityLinkableWorker(int workMax)
-	{
-		this(workMax, 0, MachineLevel.LOW);
-	}*/
-
 	public TileEntityLinkableWorker(int workMax, int workCost, int maxTransfer, MachineLevel level)
 	{
 		super(workMax, workCost, maxTransfer, level);

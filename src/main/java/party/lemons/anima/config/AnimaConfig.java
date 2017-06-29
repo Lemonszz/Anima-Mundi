@@ -33,32 +33,6 @@ public class AnimaConfig
 	@Config.Comment("The corner to draw the analyser GUI in, 0 = Top Left, 1 = Top Right, 2 = Bottom Left, 3 = Bottom Right")
 	public static int guiCorner = 0;
 
-	public static void loadConfig(Configuration config)
-	{
-	/*	config.load();
-
-		showLinkParticles = config.getBoolean(
-		"","particle", true, ""
-		);
-
-		linkParticleInterval = config.getInt(
-				"Link Particle Interval", "particle", 5, 1, 10000, "Show the particles between links"
-		);
-
-		allowPlayerPickup = config.getBoolean(
-			"Player can pick up node items", "item", true, "Allow the player to pickup items while they are in transit"
-		);
-
-		allowEntityPickup = config.getBoolean(
-				"Entities can pick up node items", "item", true, "[Unused] Allow entities to pickup items while they are in transit"
-		);
-
-		guiCorner = config.getInt(
-				"Analyser GUI corner", "gui", 0, 0, 4, ""
-		);
-
-		config.save();*/
-	}
 
 	@EventBusSubscriber(modid = ModConstants.MODID)
 	private static class EventHandler

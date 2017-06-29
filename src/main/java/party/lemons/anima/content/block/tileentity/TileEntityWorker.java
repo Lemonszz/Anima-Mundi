@@ -31,9 +31,21 @@ public abstract class TileEntityWorker extends TileEntity implements ITickable
 		return animaStorage.extractEnergy(workCost, true) == workCost;
 	}
 
-	public int extractEnergy()
+	public int extractEnergy(int amount)
 	{
-		return animaStorage.extractEnergy(workCost, false);
+		markDirty();
+		return animaStorage.extractEnergy(amount, false);
+	}
+
+	public int extractWorkEnergy()
+	{
+		return extractEnergy(workCost);
+	}
+
+	public int addEnergy(int amount)
+	{
+		markDirty();
+		return animaStorage.receiveEnergy(amount, false);
 	}
 
 	@Override

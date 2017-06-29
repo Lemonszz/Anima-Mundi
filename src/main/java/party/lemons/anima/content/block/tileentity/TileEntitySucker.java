@@ -31,7 +31,6 @@ public class TileEntitySucker extends TileEntityLinkableWorker
 	@Override
 	public void work()
 	{
-
 		for(EnumFacing facing : checkFaces)
 		{
 			TileEntity tile = world.getTileEntity(pos.offset(facing));
