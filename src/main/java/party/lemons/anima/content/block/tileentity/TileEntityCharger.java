@@ -29,6 +29,15 @@ public class TileEntityCharger extends TileEntityLinkableWorker
 		return false;
 	}
 
+	private void increaseItem()
+	{
+		currentItem++;
+		if(currentItem > items.getSlots() - 1)
+		{
+			currentItem = 0;
+		}
+	}
+
 	@Override
 	public void work()
 	{
@@ -36,18 +45,10 @@ public class TileEntityCharger extends TileEntityLinkableWorker
 		ItemStack stack = items.getStackInSlot(currentItem);
 		while(stack.isEmpty() || !(stack.getItem() instanceof ItemAnimaCharged))
 		{
-			currentItem++;
-			if(currentItem > items.getSlots() - 1)
-			{
-				currentItem = 0;
-			}
+			increaseItem();
 			stack = items.getStackInSlot(currentItem);
 		}
-		currentItem++;
-		if(currentItem > items.getSlots() - 1)
-		{
-			currentItem = 0;
-		}
+		increaseItem();
 		int chargeAmount = extractEnergy(100);
 		int amountLeft = stack.getCapability(CapabilityAnima.ANIMA, null).receiveEnergy(chargeAmount, false);
 

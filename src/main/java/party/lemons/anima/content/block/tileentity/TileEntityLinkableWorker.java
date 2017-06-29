@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 /**
  * Created by Sam on 20/06/2017.
  */
-public abstract class TileEntityLinkableWorker extends TileEntityWorker implements ILinkableTile
+public abstract class TileEntityLinkableWorker extends TileEntityWorker implements ILinkableTile, IAnalysable
 {
 	protected ArrayList<NodeLink> links;
 	protected ItemStackHandler items = new ItemStackHandler(9);
@@ -299,7 +300,7 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 		checkAndRemoveInvalidLinks();
 		sendEnergy();
 
-		if(links.size() > 0 && !isEmpty())
+		if(links.size() > 0 && !isEmpty() && canSendItems())
 		{
 			NodeLink link = nextLink();
 
@@ -407,5 +408,40 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 	public int getLinkAmount()
 	{
 		return links.size();
+	}
+
+	@Override
+	public boolean canSendItems()
+	{
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void drawInformation(int startX, int startY)
+	{
+		Minecraft mc = Minecraft.getMinecraft();
+		ItemStack drawStack = new ItemStack(getBlockType());
+
+		int dX = startX + 12;
+		int dY = startY - 12;
+
+		mc.getRenderItem().renderItemAndEffectIntoGUI(drawStack, dX, dY);
+		dY += 5;
+		mc.fontRenderer.drawString(getBlockType().getLocalizedName(), dX + 20, dY, 0xFFFFFF);
+		dY += 16;
+
+		boolean canSendPower = canSendEnergy();
+		String canPower = canSendPower ? "anima.info.cansendpower" : "anima.info.cannotsendpower";
+		int canPowerColour = canSendPower ? 0x00FF00 : 0xFF0000;
+		mc.fontRenderer.drawString(I18n.translateToLocal(canPower), dX, dY, canPowerColour);
+		dY += 12;
+		mc.fontRenderer.drawString(I18n.translateToLocal("anima.info.storedpower") + " " + animaStorage.getEnergyStored(), dX, dY, 0x77af6e);
+		dY += 12;
+		mc.fontRenderer.drawString(I18n.translateToLocal("anima.info.maxpower") + " " + animaStorage.getMaxEnergyStored(), dX, dY, 0x77af6e);
+		dY += 12;
+
+		mc.fontRenderer.drawString(getLinkAmount() + "/" + getMaxLinks() + " " + I18n.translateToLocal("anima.info.links"), dX, dY, 0x4286f4);
+		dY += 12;
 	}
 }

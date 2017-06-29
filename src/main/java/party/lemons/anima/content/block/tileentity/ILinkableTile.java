@@ -81,4 +81,11 @@ public interface ILinkableTile
 	 * @return if the tile can send energy
 	 */
 	boolean canSendEnergy();
+
+	/***
+	 * If the tile can send items
+	 * @return
+	 */
+	boolean canSendItems();
+
 }

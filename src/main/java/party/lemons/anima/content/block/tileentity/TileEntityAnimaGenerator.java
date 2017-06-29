@@ -48,4 +48,10 @@ public class TileEntityAnimaGenerator extends TileEntityLinkableWorker
 		WorldEnergy.drainEnergy(world, value / 4);
 		addEnergy(value);
 	}
+
+	@Override
+	public boolean canSendItems()
+	{
+		return false;
+	}
 }

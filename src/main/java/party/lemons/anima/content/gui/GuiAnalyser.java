@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import party.lemons.anima.config.AnimaConfig;
+import party.lemons.anima.content.block.tileentity.IAnalysable;
 import party.lemons.anima.content.block.tileentity.ILinkableTile;
 import party.lemons.anima.content.block.tileentity.TileEntityLinkableWorker;
 import party.lemons.anima.content.item.AnimaItems;
@@ -152,9 +153,7 @@ public class GuiAnalyser extends Gui
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY - 3, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY - 3 + 1, borderColorStart, borderColorStart);
 			GuiUtils.drawGradientRect(zLevel, (int)tooltipX - 3, (int)tooltipY +(int)tooltipHeight + 2, (int)tooltipX + (int)tooltipTextWidth + 3, (int)tooltipY + (int)tooltipHeight + 3, borderColorEnd, borderColorEnd);
 
-			//GlStateManager.enableLighting();
 			GlStateManager.enableDepth();
-			//RenderHelper.enableStandardItemLighting();
 			GlStateManager.enableRescaleNormal();
 		}
 	}
@@ -191,7 +190,6 @@ public class GuiAnalyser extends Gui
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 
-		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
 		ILinkableTile linkableTile = getDrawLinkTile(mc);
 		TileEntity te = getDrawTile(mc);
 
@@ -226,8 +224,7 @@ public class GuiAnalyser extends Gui
 		drawBackground(ySize, xSize, startX, startY, res.getScaledWidth(), res.getScaledHeight(), 300, mc.fontRenderer);
 		if(shouldDrawInfo())
 		{
-			drawInfo(mc, te, startX - offsetX, startY - offsetY
-			);
+			drawInfo(te, startX - offsetX, startY - offsetY);
 		}
 
 	}
@@ -244,38 +241,11 @@ public class GuiAnalyser extends Gui
 		ySize = MathHelper.clamp(ySize - yDownInterval, 0, yMax);
 	}
 
-	//TODO: maybe move this into the TileEntity class to allow for different info
-	private void drawInfo(Minecraft mc, TileEntity tile, int startX, int startY)
+	private void drawInfo(TileEntity tile, int startX, int startY)
 	{
-		if(tile != null)
+		if(tile != null && tile instanceof IAnalysable)
 		{
-			TileEntityLinkableWorker linker = (TileEntityLinkableWorker) tile;
-			ItemStack drawStack = new ItemStack(tile.getBlockType());
-
-			int dX = startX + 12;
-			int dY = startY - 12;
-
-			mc.getRenderItem().renderItemAndEffectIntoGUI(drawStack, dX, dY);
-			dY += 5;
-			mc.fontRenderer.drawString(tile.getBlockType().getLocalizedName(), dX + 20, dY, 0xFFFFFF);
-			dY += 16;
-
-			boolean canSendPower = linker.canSendEnergy();
-			String canPower = canSendPower ? "anima.info.cansendpower" : "anima.info.cannotsendpower";
-			int canPowerColour = canSendPower ? 0x00FF00 : 0xFF0000;
-			mc.fontRenderer.drawString(I18n.translateToLocal(canPower), dX, dY, canPowerColour);
-			dY += 12;
-			if(tile.hasCapability(CapabilityAnima.ANIMA, null))
-			{
-				IAnimaStorage anima = tile.getCapability(CapabilityAnima.ANIMA, null);
-				mc.fontRenderer.drawString(I18n.translateToLocal("anima.info.storedpower") + " " + anima.getEnergyStored(), dX, dY, 0x77af6e);
-				dY += 12;
-				mc.fontRenderer.drawString(I18n.translateToLocal("anima.info.maxpower") + " " + anima.getMaxEnergyStored(), dX, dY, 0x77af6e);
-				dY += 12;
-			}
-
-			mc.fontRenderer.drawString(linker.getLinkAmount() + "/" + linker.getMaxLinks() + " " + I18n.translateToLocal("anima.info.links"), dX, dY, 0x4286f4);
-			dY += 12;
+			((IAnalysable)tile).drawInformation(startX, startY);
 		}
 	}
 
