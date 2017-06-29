@@ -6,10 +6,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import party.lemons.anima.content.block.container.ContainerAnimaGenerator;
+import party.lemons.anima.content.block.container.ContainerCharger;
 import party.lemons.anima.content.block.container.ContainerSorter;
 import party.lemons.anima.content.block.tileentity.TileEntityAnimaGenerator;
+import party.lemons.anima.content.block.tileentity.TileEntityCharger;
 import party.lemons.anima.content.block.tileentity.TileEntitySorter;
 import party.lemons.anima.content.gui.GuiAnimaGenerator;
+import party.lemons.anima.content.gui.GuiCharger;
 import party.lemons.anima.content.gui.GuiSorter;
 
 import javax.annotation.Nullable;
@@ -34,6 +37,10 @@ public class GuiProxy implements IGuiHandler
 		{
 			return new ContainerAnimaGenerator(player.inventory, (TileEntityAnimaGenerator)te);
 		}
+		if(te instanceof TileEntityCharger)
+		{
+			return new ContainerCharger(player.inventory, (TileEntityCharger)te);
+		}
 
 		return null;
 	}
@@ -55,6 +62,12 @@ public class GuiProxy implements IGuiHandler
 		{
 			TileEntityAnimaGenerator generator = (TileEntityAnimaGenerator)te;
 			return new GuiAnimaGenerator(new ContainerAnimaGenerator(player.inventory, generator));
+		}
+
+		if(te instanceof TileEntityCharger)
+		{
+			TileEntityCharger generator = (TileEntityCharger)te;
+			return new GuiCharger(new ContainerCharger(player.inventory, generator));
 		}
 		return null;
 	}

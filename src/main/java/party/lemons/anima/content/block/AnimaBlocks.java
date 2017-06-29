@@ -81,6 +81,9 @@ public class AnimaBlocks
 	@ObjectHolder("anima_generator")
 	public static final BlockAnimaGenerator ANIMA_GENERATOR = null;
 
+	@ObjectHolder("charger")
+	public static final BlockCharger CHARGER = null;
+
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
@@ -103,7 +106,8 @@ public class AnimaBlocks
 				new BlockBufferedInserter().setHardness(1F).setResistance(3F),
 				new BlockSolarCollector().setHardness(1F).setResistance(3F),
 				new BlockLunarCollector().setHardness(1F).setResistance(3F),
-				new BlockAnimaGenerator().setHardness(1F).setResistance(3F)
+				new BlockAnimaGenerator().setHardness(1F).setResistance(3F),
+				new BlockCharger().setHardness(1F).setResistance(3F)
 		);
 		registerTileEntities();
 	}
@@ -140,6 +144,7 @@ public class AnimaBlocks
 		registerTileEntity(TileEntitySolarCollector.class, ModConstants.MODID + ":solarcollector");
 		registerTileEntity(TileEntityLunarCollector.class, ModConstants.MODID + ":lunarcollector");
 		registerTileEntity(TileEntityAnimaGenerator.class, ModConstants.MODID + ":animagenerator");
+		registerTileEntity(TileEntityCharger.class, ModConstants.MODID + ":charger");
 	}
 
 	public static void generalRegisterBlock(String name, Block block)

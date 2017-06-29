@@ -33,7 +33,7 @@ public class AnimaEvents
 				int max = ((ItemAnimaCharged)event.getObject().getItem()).getMaxCharge(event.getObject());
 				event.addCapability(new ResourceLocation(ModConstants.MODID, "anima"), new ICapabilitySerializable<NBTTagInt>()
 				{
-					AnimaStorage instance = new AnimaStorage(max);
+					AnimaStorage instance = new AnimaStorage(max, max, max);
 
 					@Override
 					public NBTTagInt serializeNBT()
