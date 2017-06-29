@@ -432,9 +432,15 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 		dY += 16;
 
 		boolean canSendPower = canSendEnergy();
+		boolean canSendItems = canSendItems();
+
 		String canPower = canSendPower ? "anima.info.cansendpower" : "anima.info.cannotsendpower";
+		String canItems = canSendItems ? "anima.info.cansenditems" : "anima.info.cannotsenditems";
 		int canPowerColour = canSendPower ? 0x00FF00 : 0xFF0000;
+		int canItemColour = canSendItems ? 0x00FF00 : 0xFF0000;
 		mc.fontRenderer.drawString(I18n.translateToLocal(canPower), dX, dY, canPowerColour);
+		dY += 12;
+		mc.fontRenderer.drawString(I18n.translateToLocal(canItems), dX, dY, canItemColour);
 		dY += 12;
 		mc.fontRenderer.drawString(I18n.translateToLocal("anima.info.storedpower") + " " + animaStorage.getEnergyStored(), dX, dY, 0x77af6e);
 		dY += 12;
@@ -442,6 +448,5 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 		dY += 12;
 
 		mc.fontRenderer.drawString(getLinkAmount() + "/" + getMaxLinks() + " " + I18n.translateToLocal("anima.info.links"), dX, dY, 0x4286f4);
-		dY += 12;
 	}
 }

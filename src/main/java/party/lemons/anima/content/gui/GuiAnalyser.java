@@ -180,7 +180,7 @@ public class GuiAnalyser extends Gui
 	}
 
 	private float xMax = 120;
-	private float yMax = 72;
+	private float yMax = 80; //TODO: link analyser size to information size
 	private float xUpInterval = 20;
 	private float yUpInterval = 6;
 	private float xDownInterval = 15;
@@ -281,6 +281,6 @@ public class GuiAnalyser extends Gui
 
 	public boolean shouldDrawInfo()
 	{
-		return xSize == 120 && ySize == 72;
+		return xSize == xMax && ySize == yMax;
 	}
 }
