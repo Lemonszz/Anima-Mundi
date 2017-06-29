@@ -53,17 +53,24 @@ public class TileEntityCharger extends TileEntityLinkableWorker
 	@Override
 	public void work()
 	{
-		extractWorkEnergy();
-		ItemStack stack = items.getStackInSlot(currentItem);
-		while(stack.isEmpty() || !(stack.getItem() instanceof ItemAnimaCharged))
+		if(!world.isRemote)
 		{
+			int safe = 0;
+			extractWorkEnergy();
+			ItemStack stack = items.getStackInSlot(currentItem);
+			while((stack.isEmpty() || !(stack.getItem() instanceof ItemAnimaCharged)) && safe < 10)
+			{
+				increaseItem();
+				stack = items.getStackInSlot(currentItem);
+				safe++;
+			}
 			increaseItem();
-			stack = items.getStackInSlot(currentItem);
+			if(stack.hasCapability(CapabilityAnima.ANIMA, null))
+			{
+				int chargeAmount = extractEnergy(100);
+				int amountLeft = stack.getCapability(CapabilityAnima.ANIMA, null).receiveEnergy(chargeAmount, false);
+				addEnergy(amountLeft);
+			}
 		}
-		increaseItem();
-		int chargeAmount = extractEnergy(100);
-		int amountLeft = stack.getCapability(CapabilityAnima.ANIMA, null).receiveEnergy(chargeAmount, false);
-
-		addEnergy(amountLeft);
 	}
 }
