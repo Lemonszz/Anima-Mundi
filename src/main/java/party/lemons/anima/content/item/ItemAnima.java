@@ -9,6 +9,11 @@ public class ItemAnima extends Item
 {
 	public ItemAnima(String name)
 	{
-		AnimaItems.generalRegisterItem(name, this, true);
+		this(name, true);
+	}
+
+	public ItemAnima(String name, boolean genericModel)
+	{
+		AnimaItems.generalRegisterItem(name, this, genericModel);
 	}
 }

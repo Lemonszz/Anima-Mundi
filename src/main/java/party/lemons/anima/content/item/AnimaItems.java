@@ -13,6 +13,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.crafting.AnimaTab;
+import party.lemons.anima.energy.CapabilityAnima;
+import party.lemons.anima.energy.IAnimaStorage;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,9 @@ public class AnimaItems
 	@ObjectHolder("link_analyser")
 	public static final ItemLinkAnalyser LINK_ANALYSER = null;
 
+	@ObjectHolder("anima_jar")
+	public static final ItemAnimaJar ANIMA_JAR = null;
+
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
@@ -46,7 +51,8 @@ public class AnimaItems
 				new ItemAnima("anima_shard"),
 				new ItemAnima("crystal_anima_shard"),
 				new ItemAnima("dark_anima_shard"),
-				new ItemLinkAnalyser()
+				new ItemLinkAnalyser(),
+				new ItemAnimaJar()
 		);
 	}
 
@@ -93,5 +99,16 @@ public class AnimaItems
 			}
 			return linker_off;
 		});
+
+		ModelResourceLocation anima_jar_empty = new ModelResourceLocation(ANIMA_JAR.getRegistryName(), "inventory");
+		ModelResourceLocation anima_jar_full = new ModelResourceLocation(ANIMA_JAR.getRegistryName() + "_full", "inventory");
+		ModelBakery.registerItemVariants(ANIMA_JAR, anima_jar_empty, anima_jar_full);
+
+		ModelLoader.setCustomMeshDefinition(ANIMA_JAR, stack ->
+		{
+			IAnimaStorage storage = stack.getCapability(CapabilityAnima.ANIMA, null);
+			return storage.getEnergyStored() > 0 ? anima_jar_full : anima_jar_empty;
+		});
+
 	}
 }
