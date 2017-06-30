@@ -2,7 +2,9 @@ package party.lemons.anima.content.item;
 
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -56,6 +58,8 @@ public class AnimaItems
 				new ItemLinkAnalyser(),
 				new ItemAnimaJar()
 		);
+
+
 	}
 
 	@SubscribeEvent
@@ -108,11 +112,7 @@ public class AnimaItems
 		ModelResourceLocation anima_jar_full = new ModelResourceLocation(ANIMA_JAR.getRegistryName() + "_full", "inventory");
 		ModelBakery.registerItemVariants(ANIMA_JAR, anima_jar_empty, anima_jar_full);
 
-		ModelLoader.setCustomMeshDefinition(ANIMA_JAR, stack ->
-		{
-			IAnimaStorage storage = stack.getCapability(CapabilityAnima.ANIMA, null);
-			return storage.getEnergyStored() > 0 ? anima_jar_full : anima_jar_empty;
-		});
+		ModelLoader.setCustomMeshDefinition(ANIMA_JAR, stack -> ANIMA_JAR.getCurrentCharge(stack) > 0 ? anima_jar_full : anima_jar_empty);
 
 	}
 }

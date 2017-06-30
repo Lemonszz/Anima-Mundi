@@ -26,42 +26,5 @@ public class AnimaEvents
 	@SubscribeEvent
 	public static void attachItemStacks(AttachCapabilitiesEvent<ItemStack> event)
 	{
-		if(!event.getObject().isEmpty())
-		{
-			if(event.getObject().getItem() instanceof ItemAnimaCharged)
-			{
-				int max = ((ItemAnimaCharged)event.getObject().getItem()).getMaxCharge(event.getObject());
-				event.addCapability(new ResourceLocation(ModConstants.MODID, "anima"), new ICapabilitySerializable<NBTTagInt>()
-				{
-					AnimaStorage instance = new AnimaStorage(max, max, max);
-
-					@Override
-					public NBTTagInt serializeNBT()
-					{
-						return (NBTTagInt) CapabilityAnima.ANIMA.getStorage().writeNBT(CapabilityAnima.ANIMA, instance, null);
-					}
-
-					@Override
-					public void deserializeNBT(NBTTagInt nbt)
-					{
-						instance.setEnergyStored(nbt.getInt());
-					}
-
-					@Override
-					public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-					{
-						return capability == CapabilityAnima.ANIMA;
-					}
-
-					@Nullable
-					@Override
-					public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-					{
-						return capability == CapabilityAnima.ANIMA ? CapabilityAnima.ANIMA.<T>cast(instance) : null;
-					}
-				});
-			}
-		}
 	}
-
 }

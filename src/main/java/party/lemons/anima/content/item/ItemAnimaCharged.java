@@ -3,14 +3,21 @@ package party.lemons.anima.content.item;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import party.lemons.anima.energy.AnimaStorage;
 import party.lemons.anima.energy.CapabilityAnima;
 import party.lemons.anima.energy.IAnimaStorage;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -41,8 +48,14 @@ public abstract class ItemAnimaCharged extends ItemAnima
 
 	public int getCurrentCharge(ItemStack stack)
 	{
-		IAnimaStorage storage = stack.getCapability(CapabilityAnima.ANIMA, null);
-		return storage.getEnergyStored();
+		NBTTagCompound tags = stack.getTagCompound();
+		if(tags == null)
+		{
+			tags = new NBTTagCompound();
+			tags.setInteger("charge", 0);
+			stack.setTagCompound(tags);
+		}
+		return tags.getInteger("charge");
 	}
 
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
@@ -52,9 +65,9 @@ public abstract class ItemAnimaCharged extends ItemAnima
 			items.add(new ItemStack(this));
 
 			ItemStack stack = new ItemStack(this);
-			IAnimaStorage storage = stack.getCapability(CapabilityAnima.ANIMA, null);
-			storage.receiveEnergy(getMaxCharge(stack), false);
-
+			NBTTagCompound tags = new NBTTagCompound();
+			tags.setInteger("charge", getMaxCharge(stack));
+			stack.setTagCompound(tags);
 			items.add(stack);
 		}
 	}
@@ -78,6 +91,32 @@ public abstract class ItemAnimaCharged extends ItemAnima
 		{
 			return combo;
 		}
+	}
+
+	public int addCharge(ItemStack stack, int amount)
+	{
+		int currentCharge = getCurrentCharge(stack);
+		int energyReceived =  Math.min(getMaxCharge(stack) - currentCharge, Math.min(getMaxCharge(stack), amount));
+
+		int energy = currentCharge + energyReceived;
+		stack.getTagCompound().setInteger("charge", energy);
+		return energyReceived;
+	}
+
+	public int removeCharge(ItemStack stack, int amount)
+	{
+		int currentCharge = getCurrentCharge(stack);
+
+		int energyExtracted = Math.min(currentCharge, Math.min(getMaxCharge(stack), amount));
+		int energy = currentCharge - energyExtracted;
+		stack.getTagCompound().setInteger("charge", energy);
+		return energyExtracted;
+	}
+
+	@Nullable
+	public NBTTagCompound getNBTShareTag(ItemStack stack)
+	{
+		return stack.getTagCompound();
 	}
 
 	public abstract int getMaxCharge(ItemStack stack);

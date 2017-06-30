@@ -1,8 +1,11 @@
 package party.lemons.anima.content.block.tileentity;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import org.lwjgl.Sys;
 import party.lemons.anima.content.item.ItemAnimaCharged;
 import party.lemons.anima.energy.CapabilityAnima;
+import party.lemons.anima.energy.IAnimaStorage;
 
 /**
  * Created by Sam on 29/06/2017.
@@ -15,6 +18,12 @@ public class TileEntityCharger extends TileEntityLinkableWorker
 	{
 		super(10, 10, 100, MachineLevel.BATTERY);
 		currentItem = 0;
+	}
+
+	@Override
+	public void update()
+	{
+		super.update();
 	}
 
 	@Override
@@ -55,22 +64,20 @@ public class TileEntityCharger extends TileEntityLinkableWorker
 	{
 		if(!world.isRemote)
 		{
-			int safe = 0;
 			extractWorkEnergy();
 			ItemStack stack = items.getStackInSlot(currentItem);
-			while((stack.isEmpty() || !(stack.getItem() instanceof ItemAnimaCharged)) && safe < 10)
+			while(!isEmpty() && (stack.isEmpty() || !(stack.getItem() instanceof ItemAnimaCharged)))
 			{
 				increaseItem();
 				stack = items.getStackInSlot(currentItem);
-				safe++;
 			}
 			increaseItem();
-			if(stack.hasCapability(CapabilityAnima.ANIMA, null))
-			{
-				int chargeAmount = extractEnergy(100);
-				int amountLeft = stack.getCapability(CapabilityAnima.ANIMA, null).receiveEnergy(chargeAmount, false);
-				addEnergy(amountLeft);
-			}
+
+			int chargeAmount = extractEnergy(100);
+
+			ItemAnimaCharged ch = (ItemAnimaCharged) stack.getItem();
+			int amountLeft = ch.addCharge(stack, chargeAmount);
+			addEnergy(amountLeft);
 		}
 	}
 }
