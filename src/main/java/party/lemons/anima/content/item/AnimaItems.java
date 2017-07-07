@@ -1,12 +1,20 @@
 package party.lemons.anima.content.item;
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.IModel;
+import net.minecraftforge.client.model.ItemLayerModel;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,8 +25,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import party.lemons.anima.config.ModConstants;
 import party.lemons.anima.crafting.AnimaTab;
-import party.lemons.anima.energy.CapabilityAnima;
-import party.lemons.anima.energy.IAnimaStorage;
 
 import java.util.ArrayList;
 
@@ -114,5 +120,21 @@ public class AnimaItems
 
 		ModelLoader.setCustomMeshDefinition(ANIMA_JAR, stack -> ANIMA_JAR.getCurrentCharge(stack) > 0 ? anima_jar_full : anima_jar_empty);
 
+
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public static void modelBake(ModelBakeEvent event)
+	{
+		//TODO there's probably a better way of doing this
+		for(Item item : Item.REGISTRY)
+		{
+			if(item instanceof ItemSword && item != Items.DIAMOND_SWORD)
+			{
+				IBakedModel model = new GlowItemModel(item);
+				event.getModelRegistry().putObject(new ModelResourceLocation(item.getRegistryName(), "inventory"), model);
+			}
+		}
 	}
 }

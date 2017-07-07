@@ -19,6 +19,8 @@ public class ParticleManager
 	public static void registerParticles(TextureStitchEvent.Pre event)
 	{
 		stitchParticle("particle/glow_par", event.getMap());
+		stitchParticle("items/sword_glow_top", event.getMap());
+		stitchParticle("items/sword_glow_bottom", event.getMap());
 	}
 
 	private static void stitchParticle(ResourceLocation loc, TextureMap map)
