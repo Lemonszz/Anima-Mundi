@@ -73,7 +73,7 @@ public class TileEntitySorter extends TileEntityLinkableWorker
 	{
 		for(NodeLink link: links)
 		{
-			if(BlockUtil.isSamePosition(pos, link.getLinkPos()) && link.getOutputSide() == facing)
+			if(pos.equals(link.getLinkPos()) && link.getOutputSide() == facing)
 			{
 				return true;
 			}
@@ -99,7 +99,7 @@ public class TileEntitySorter extends TileEntityLinkableWorker
 		for(int i = 0; i < links.size(); i++)
 		{
 			NodeLink link = links.get(i);
-			if(BlockUtil.isSamePosition(link.getLinkPos(), pos))
+			if(link.getLinkPos().equals(pos))
 			{
 				links.remove(link);
 			}

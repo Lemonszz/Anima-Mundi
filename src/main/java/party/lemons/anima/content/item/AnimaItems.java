@@ -17,6 +17,7 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ItemLayerModel;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import party.lemons.anima.config.ModConstants;
+import party.lemons.anima.content.item.shield.ItemAnimaShield;
 import party.lemons.anima.crafting.AnimaTab;
 
 import java.util.ArrayList;
@@ -53,6 +55,9 @@ public class AnimaItems
 	@ObjectHolder("anima_jar")
 	public static final ItemAnimaJar ANIMA_JAR = null;
 
+	@ObjectHolder("basic_shield")
+	public static final ItemAnimaShield SHIELD_BASIC = null;
+
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
@@ -62,7 +67,8 @@ public class AnimaItems
 				new ItemAnima("crystal_anima_shard"),
 				new ItemAnima("dark_anima_shard"),
 				new ItemLinkAnalyser(),
-				new ItemAnimaJar()
+				new ItemAnimaJar(),
+				new ItemAnimaShield("basic_shield", 1000, 250, 25, 100)
 		);
 
 
@@ -97,6 +103,8 @@ public class AnimaItems
 	@SideOnly(Side.CLIENT)
 	private static void initSpecialModels()
 	{
+		//TODO: Fix this fucktardery
+
 		ModelResourceLocation linker_off = new ModelResourceLocation(LINKER.getRegistryName(), "inventory");
 		ModelResourceLocation linker_on = new ModelResourceLocation(LINKER.getRegistryName() + "_on", "inventory");
 		ModelBakery.registerItemVariants(LINKER, linker_off, linker_on);
@@ -114,27 +122,30 @@ public class AnimaItems
 			return linker_off;
 		});
 
+		//TODO: Automate this
+		ModelResourceLocation shield_off = new ModelResourceLocation(SHIELD_BASIC.getRegistryName(), "inventory");
+		ModelResourceLocation shield_on = new ModelResourceLocation(SHIELD_BASIC.getRegistryName() + "_on", "inventory");
+		ModelBakery.registerItemVariants(SHIELD_BASIC, shield_off, shield_on);
+
+		ModelLoader.setCustomMeshDefinition(SHIELD_BASIC, stack ->
+		{
+			NBTTagCompound tags = stack.getTagCompound();
+			if(tags != null)
+			{
+				if(tags.getBoolean("on"))
+				{
+					return shield_on;
+				}
+			}
+			return shield_off;
+		});
+
+
 		ModelResourceLocation anima_jar_empty = new ModelResourceLocation(ANIMA_JAR.getRegistryName(), "inventory");
 		ModelResourceLocation anima_jar_full = new ModelResourceLocation(ANIMA_JAR.getRegistryName() + "_full", "inventory");
 		ModelBakery.registerItemVariants(ANIMA_JAR, anima_jar_empty, anima_jar_full);
 
 		ModelLoader.setCustomMeshDefinition(ANIMA_JAR, stack -> ANIMA_JAR.getCurrentCharge(stack) > 0 ? anima_jar_full : anima_jar_empty);
 
-
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public static void modelBake(ModelBakeEvent event)
-	{
-		//TODO there's probably a better way of doing this
-		for(Item item : Item.REGISTRY)
-		{
-			if(item instanceof ItemSword && item != Items.DIAMOND_SWORD)
-			{
-				IBakedModel model = new GlowItemModel(item);
-				event.getModelRegistry().putObject(new ModelResourceLocation(item.getRegistryName(), "inventory"), model);
-			}
-		}
 	}
 }

@@ -26,7 +26,7 @@ public class ParticleLink extends ParticleGlowBase
 		updateMovement();
 
 		BlockPos currentPos = new BlockPos(this.posX, this.posY, this.posZ);
-		if(BlockUtil.isSamePosition(currentPos, target))
+		if(currentPos.equals(target))
 		{
 			this.setExpired();
 		}

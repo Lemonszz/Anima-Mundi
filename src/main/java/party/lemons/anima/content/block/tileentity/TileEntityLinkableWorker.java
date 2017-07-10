@@ -96,7 +96,7 @@ public abstract class TileEntityLinkableWorker extends TileEntityWorker implemen
 	{
 		for(NodeLink link: links)
 		{
-			if(BlockUtil.isSamePosition(pos, link.getLinkPos()))
+			if(pos.equals(link.getLinkPos()))
 			{
 				return true;
 			}
