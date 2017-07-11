@@ -35,6 +35,7 @@ item.anima:anima_jar.name=Anima Jar
 item.anima:basic_shield.name=Basic Shield
 item.anima:sturdy_shield.name=Sturdy Shield
 item.anima:rapid_shield.name=Rapid Shield
+item.anima:anima_core.name=Anima Core
 
 tile.anima:extractor.name=Extractor
 tile.anima:destroyer.name=Destroyer
