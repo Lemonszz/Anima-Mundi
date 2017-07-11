@@ -195,10 +195,17 @@ public class EntityBlockSuck extends Entity
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
+		if(compound == null)
+			compound = new NBTTagCompound();
+
 		compound.setInteger("current", current_time);
-		compound.setInteger("x_t", targetOutput.getX());
-		compound.setInteger("y_t", targetOutput.getY());
-		compound.setInteger("z_t", targetOutput.getZ());
+
+		if(targetOutput != null)
+		{
+			compound.setInteger("x_t", targetOutput.getX());
+			compound.setInteger("y_t", targetOutput.getY());
+			compound.setInteger("z_t", targetOutput.getZ());
+		}
 
 		compound.setInteger("st", Block.getStateId(getState()));
 
