@@ -7,6 +7,10 @@ public class ModConstants
 {
 	public static final String MODID = "anima";
 	public static final String MODNAME = "Anima Mundi";
+<<<<<<< HEAD
 	public static final String MODVERSION = "0.2.0";
+=======
+	public static final String MODVERSION = "0.1.2";
+>>>>>>> master
 	public static final String UPDATEURL = "https://www.lemons.party/anima/update.json";
 }
