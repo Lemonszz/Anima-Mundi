@@ -83,36 +83,38 @@ public class ContainerSorter extends Container
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
 	{
-		try
+		if(slotId != -999 && getSlot(slotId) != null && getSlot(slotId) instanceof SlotSorter)
 		{
-			if(this.getSlot(slotId) instanceof SlotDefaultSort)
+			if(getSlot(slotId).getHasStack())
 			{
-
-				if(!player.isSneaking())
-				{
-					te.incrementDefaultSort();
-				}
-				else
-				{
-					te.decrementDefaultSort();
-				}
+				getSlot(slotId).putStack(ItemStack.EMPTY);
 			}
-			if(!(this.getSlot(slotId) instanceof SlotSorter))
+
+			//TY mcjty
+			ItemStack clickedStack = player.inventory.getItemStack();
+			if(!clickedStack.isEmpty())
 			{
-				return super.slotClick(slotId, dragType, clickTypeIn, player);
+				ItemStack copy = clickedStack.copy();
+				copy.setCount(1);
+				getSlot(slotId).putStack(copy);
+			}
+			detectAndSendChanges();
+			return ItemStack.EMPTY;
+		}
+
+		if(slotId != -999 && getSlot(slotId) instanceof SlotDefaultSort)
+		{
+			if(dragType == 0)
+			{
+				te.incrementDefaultSort();
 			}
 			else
 			{
-				this.getSlot(slotId).isItemValid(player.inventory.getItemStack());
+				te.decrementDefaultSort();
 			}
-
-
 		}
-		catch(ArrayIndexOutOfBoundsException e)
-		{
-			return super.slotClick(slotId, dragType, clickTypeIn, player);
-		}
-		return ItemStack.EMPTY;
+
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
 	@Override
@@ -186,8 +188,6 @@ public class ContainerSorter extends Container
 		public void putStack(ItemStack stack)
 		{
 		}
-
-
 	}
 
 }

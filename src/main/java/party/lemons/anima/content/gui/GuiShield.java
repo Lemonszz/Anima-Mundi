@@ -166,13 +166,12 @@ public class GuiShield extends Gui
 		boolean drawSecondary = secondaryWidth != fillWidth && moveSecondary;
 
 		int drawWidth = maxBarWidth - (int)fillWidth;
-		System.out.println(drawWidth + " " + secondaryWidth);
 
+		GuiUtils.drawTexturedModalRect(getStartX(res), getStartY(res), 0, 16, 92, 10, 400);
 		if(drawSecondary)
 			GuiUtils.drawTexturedModalRect(getStartX(res) + 1, getStartY(res) + 1, 0, 8 , secondaryWidth, 8, 400);
 		if(drawFill)
 			GuiUtils.drawTexturedModalRect(getStartX(res) + 1, getStartY(res) + 1, 0, 0 ,  drawWidth,8, 400);
 
-		GuiUtils.drawTexturedModalRect(getStartX(res), getStartY(res), 0, 16, 92, 10, 400);
 	}
 }

@@ -27,4 +27,7 @@ public class ParticleLinkColoured extends ParticleLink
 		super.onUpdate();
 	}
 
+	@Override
+	protected void updateColour()
+	{}
 }

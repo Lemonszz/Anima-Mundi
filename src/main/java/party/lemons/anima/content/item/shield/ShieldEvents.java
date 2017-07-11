@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -48,16 +49,42 @@ public class ShieldEvents
 
 						event.setAmount(remain);
 						item.depleteShield(stack, amountTaken * 10);
+						item.removeCharge(stack, (int) (amountTaken * 40));
 
 						if(item.getShieldCharge(stack) == 0)
 						{
 							item.getShield(stack).onDeplete(stack, event.getEntityLiving());
 						}
 					}
-
 					return;
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void itemPickup(EntityItemPickupEvent event)
+	{
+		if(!(event.getEntity() instanceof EntityPlayer) || event.getItem().getItem().isEmpty())
+			return;
+
+		if(event.getItem().getItem().getItem() instanceof ItemAnimaShield)
+		{
+			ItemAnimaShield i  = (ItemAnimaShield) event.getItem().getItem().getItem();
+			i.setOff(event.getItem().getItem(), event.getEntityPlayer());
+		}
+	}
+
+	@SubscribeEvent
+	public static  void itemToss(ItemTossEvent event)
+	{
+		if(event.getEntityItem().getItem().isEmpty())
+			return;
+
+		if(event.getEntityItem().getItem().getItem() instanceof ItemAnimaShield)
+		{
+			ItemAnimaShield i  = (ItemAnimaShield) event.getEntityItem().getItem().getItem();
+			i.setOff(event.getEntityItem().getItem(), event.getPlayer());
 		}
 	}
 }

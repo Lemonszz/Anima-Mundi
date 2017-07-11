@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "anima:anima_core",
+	"count": 1
+  },
+  "pattern": [
+    "AIA",
+    "IJI",
+    "AIA"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "A": {
+      "item": "anima:anima_shard"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore" : "ingotIron"
+    },
+    "J":{
+      "item": "#anima_jar_full"
+    }
+  }
+}

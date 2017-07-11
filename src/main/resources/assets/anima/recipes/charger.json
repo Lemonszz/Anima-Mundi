@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "anima:charger",
+    "count": 1
+  },
+  "pattern": [
+    "AGA",
+    "RRR",
+    "GAG"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore" : "ingotGold"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore" : "dustRedstone"
+    },
+    "A": {
+      "item": "anima:crystal_anima_shard"
+    }
+  }
+}

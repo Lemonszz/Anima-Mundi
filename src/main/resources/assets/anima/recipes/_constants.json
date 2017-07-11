@@ -1,0 +1,13 @@
+[
+  {
+    "name": "anima_jar_full",
+    "ingredient": {
+      "type": "minecraft:item_nbt",
+      "item": "anima:anima_jar",
+      "nbt":
+      {
+        "charge": 15000
+      }
+    }
+  }
+]

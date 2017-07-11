@@ -58,6 +58,15 @@ public class AnimaItems
 	@ObjectHolder("basic_shield")
 	public static final ItemAnimaShield SHIELD_BASIC = null;
 
+	@ObjectHolder("sturdy_shield")
+	public static final ItemAnimaShield SHIELD_STURDY = null;
+
+	@ObjectHolder("rapid_shield")
+	public static final ItemAnimaShield SHIELD_RAPID = null;
+
+	@ObjectHolder("anima_core")
+	public static final ItemAnima ANIMA_CORE = null;
+
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
 	{
@@ -68,10 +77,11 @@ public class AnimaItems
 				new ItemAnima("dark_anima_shard"),
 				new ItemLinkAnalyser(),
 				new ItemAnimaJar(),
-				new ItemAnimaShield("basic_shield", 1000, 250, 25, 100)
+				new ItemAnimaShield("basic_shield", 1000, 50, 5, 200),
+				new ItemAnimaShield("sturdy_shield", 3000, 150, 5, 400),
+				new ItemAnimaShield("rapid_shield", 1250, 50, 10, 100),
+				new ItemAnima("anima_core")
 		);
-
-
 	}
 
 	@SubscribeEvent
@@ -122,23 +132,31 @@ public class AnimaItems
 			return linker_off;
 		});
 
-		//TODO: Automate this
-		ModelResourceLocation shield_off = new ModelResourceLocation(SHIELD_BASIC.getRegistryName(), "inventory");
-		ModelResourceLocation shield_on = new ModelResourceLocation(SHIELD_BASIC.getRegistryName() + "_on", "inventory");
-		ModelBakery.registerItemVariants(SHIELD_BASIC, shield_off, shield_on);
-
-		ModelLoader.setCustomMeshDefinition(SHIELD_BASIC, stack ->
+		ItemAnimaShield[] shields =
 		{
-			NBTTagCompound tags = stack.getTagCompound();
-			if(tags != null)
+			SHIELD_BASIC, SHIELD_STURDY,SHIELD_RAPID
+		};
+
+		for(ItemAnimaShield shield : shields)
+		{
+			ModelResourceLocation shield_off = new ModelResourceLocation(shield.getRegistryName(), "inventory");
+			ModelResourceLocation shield_on = new ModelResourceLocation(shield.getRegistryName() + "_on", "inventory");
+
+			ModelBakery.registerItemVariants(shield, shield_off, shield_on);
+
+			ModelLoader.setCustomMeshDefinition(shield, stack ->
 			{
-				if(tags.getBoolean("on"))
+				NBTTagCompound tags = stack.getTagCompound();
+				if(tags != null)
 				{
-					return shield_on;
+					if(tags.getBoolean("on"))
+					{
+						return shield_on;
+					}
 				}
-			}
-			return shield_off;
-		});
+				return shield_off;
+			});
+		}
 
 
 		ModelResourceLocation anima_jar_empty = new ModelResourceLocation(ANIMA_JAR.getRegistryName(), "inventory");
@@ -146,6 +164,17 @@ public class AnimaItems
 		ModelBakery.registerItemVariants(ANIMA_JAR, anima_jar_empty, anima_jar_full);
 
 		ModelLoader.setCustomMeshDefinition(ANIMA_JAR, stack -> ANIMA_JAR.getCurrentCharge(stack) > 0 ? anima_jar_full : anima_jar_empty);
+	}
 
+	public static ArrayList<ItemAnimaShield> shieldItems = new ArrayList<>();
+	public static void postInit()
+	{
+		for(Item item : Item.REGISTRY)
+		{
+			if(item instanceof ItemAnimaShield)
+			{
+				shieldItems.add((ItemAnimaShield) item);
+			}
+		}
 	}
 }

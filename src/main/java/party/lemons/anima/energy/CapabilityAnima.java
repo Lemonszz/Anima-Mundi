@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
  */
 public class CapabilityAnima
 {
-	@CapabilityInject(IEnergyStorage.class)
+	@CapabilityInject(IAnimaStorage.class)
 	public static Capability<IAnimaStorage> ANIMA = null;
 
 	public static void register()

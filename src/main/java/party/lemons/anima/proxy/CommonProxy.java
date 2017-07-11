@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import party.lemons.anima.Anima;
 import party.lemons.anima.config.ModConstants;
+import party.lemons.anima.content.item.AnimaItems;
 import party.lemons.anima.content.worldgen.AnimaWorldGenerator;
 import party.lemons.anima.energy.CapabilityAnima;
 import party.lemons.anima.entity.EntityBlockSuck;
@@ -40,6 +41,6 @@ public class CommonProxy implements IProxy
 		@Override
 		public void OnPostInit(FMLPostInitializationEvent e)
 		{
-
+			AnimaItems.postInit();
 		}
 	}

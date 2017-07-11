@@ -1,12 +1,15 @@
 package party.lemons.anima.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
+import party.lemons.anima.content.item.AnimaItems;
+import party.lemons.anima.content.item.shield.ItemAnimaShield;
 
 /**
  * Created by Sam on 22/06/2017.
@@ -33,6 +36,14 @@ public class ItemUtils
 			{
 				InventoryHelper.spawnItemStack(worldIn, x, y, z, itemstack);
 			}
+		}
+	}
+
+	public static void cooldownShields(EntityPlayer player, int cooldown)
+	{
+		for(ItemAnimaShield shield : AnimaItems.shieldItems)
+		{
+			player.getCooldownTracker().setCooldown(shield, cooldown);
 		}
 	}
 }

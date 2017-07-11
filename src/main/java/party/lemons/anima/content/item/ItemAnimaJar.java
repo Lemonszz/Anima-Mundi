@@ -20,6 +20,7 @@ public class ItemAnimaJar extends ItemAnimaCharged
 	{
 		super("anima_jar", false);
 		this.showBarOnDepleted = false;
+		this.setContainerItem(this);
 	}
 
 	@Override

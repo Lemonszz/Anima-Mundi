@@ -1,7 +1,7 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "anima:items/basicshield",
+        "layer0": "anima:items/rapidshield",
         "layer1": "anima:items/basicshield_on"
     }
 }

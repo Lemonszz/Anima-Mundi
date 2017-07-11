@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "anima:anima_jar",
+	"count": 1
+  },
+  "pattern": [
+    "A",
+    "G"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "A": {
+      "item": "anima:crystal_anima_shard"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore" : "blockGlass"
+    }
+  }
+}

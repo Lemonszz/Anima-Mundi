@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "anima:rapid_shield",
+	"count": 1
+  },
+  "pattern": [
+    "DID",
+    "ICI",
+    "AAA"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "A": {
+      "item" : "anima:dark_anima_shard"
+    },
+	"I": {
+      "type": "forge:ore_dict",
+      "ore" : "ingotIron"
+    },
+	"D":{
+	  "item": "anima:crystal_anima_block"
+	},
+    "C":{
+      "item": "anima:anima_core"
+    }
+  }
+}

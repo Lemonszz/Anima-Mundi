@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import party.lemons.anima.content.item.ItemAnimaCharged;
+import party.lemons.anima.util.EntityUtil;
+import party.lemons.anima.util.ItemUtils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -102,7 +104,8 @@ public class ItemAnimaShield extends ItemAnimaCharged
 		Shield shield = getShield(stack);
 		shield.setCharge(0);
 		shield.setCanRecharge();
-		player.getCooldownTracker().setCooldown(this, 300);
+
+		ItemUtils.cooldownShields(player, 300);
 
 		stack.getTagCompound().setTag("shield", shield.serialize());
 		stack.getTagCompound().setBoolean("on", false);
@@ -168,14 +171,48 @@ public class ItemAnimaShield extends ItemAnimaCharged
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
+	public boolean canTurnOn(ItemStack stack)
+	{
+		return getCurrentCharge(stack) > 0;
+	}
+
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		Shield sh = getShield(stack);
-		if(entityIn instanceof EntityPlayer)
-			sh.update(stack, (EntityPlayer) entityIn);
+		if(isOn(stack))
+		{
+			Shield sh = getShield(stack);
+			if(entityIn instanceof EntityPlayer)
+			{
+				sh.update(stack, (EntityPlayer) entityIn);
+				ItemStack active = EntityUtil.getActivePlayerShield((EntityPlayer) entityIn);
+				ItemAnimaShield sI = (ItemAnimaShield) active.getItem();
+				if(!active.equals(stack) && sI.isOn(active))
+				{
+					setOff(stack, (EntityPlayer) entityIn);
+				}
+			}
+			if(!stack.isEmpty())
+			{
+				stack.getTagCompound().setTag("shield", sh.serialize());
+				super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+			}
 
-		stack.getTagCompound().setTag("shield", sh.serialize());
-		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+			if(worldIn.getTotalWorldTime() % 40 == 0)
+				this.removeCharge(stack, 1);
+
+			if(getCurrentCharge(stack) == 0 && entityIn instanceof EntityPlayer)
+			{
+				setOff(stack, (EntityPlayer) entityIn);
+			}
+		}
 	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	{
+		return newStack.isEmpty() || newStack.getItem() != oldStack.getItem();
+	}
+
+
 }

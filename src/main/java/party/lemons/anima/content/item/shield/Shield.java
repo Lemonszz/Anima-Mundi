@@ -88,6 +88,7 @@ public class Shield
 	{
 		currentCapacity = Math.max(0, currentCapacity - v);
 		rechargeTime = 0;
+
 	}
 
 	public int getCharge()

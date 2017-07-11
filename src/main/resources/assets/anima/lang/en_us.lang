@@ -22,12 +22,19 @@ anima:advancements.anima.root.description=Anima Mundi Beta! Advancements Coming 
 
 itemGroup.anima=Anima Mundi
 
+anima.shield.capacity=Capacity
+anima.shield.rechargedelay=Recharge Delay
+anima.shield.rechargerate=Recharge Rate
+
 item.anima:linker.name=Node Linker
 item.anima:anima_shard.name=Anima Shard
 item.anima:crystal_anima_shard.name=Crystal Anima Shard
 item.anima:dark_anima_shard.name=Dark Anima Shard
 item.anima:link_analyser.name=Link Analyser
 item.anima:anima_jar.name=Anima Jar
+item.anima:basic_shield.name=Basic Shield
+item.anima:sturdy_shield.name=Sturdy Shield
+item.anima:rapid_shield.name=Rapid Shield
 
 tile.anima:extractor.name=Extractor
 tile.anima:destroyer.name=Destroyer

@@ -16,31 +16,38 @@ public class SlotSorter extends SlotItemHandler
 	}
 
 	@Override
-	public boolean canTakeStack(EntityPlayer playerIn)
-	{
+	public boolean canTakeStack(EntityPlayer player) {
 		return false;
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack stack)
-	{
-		if(!this.getStack().isEmpty())
-		{
-			ItemStack setStack = stack.copy();
-			setStack.setCount(1);
-			this.putStack(ItemStack.EMPTY);
-		}
-		else
-		{
-			if(!stack.isEmpty())
-			{
-				ItemStack setStack = stack.copy();
-				setStack.setCount(1);
-				this.putStack(setStack);
-			}
-		}
-		return false;
+	public ItemStack decrStackSize(int amount) {
+		return ItemStack.EMPTY;
 	}
 
+	@Override
+	public int getSlotStackLimit() {
+		return 0;
+	}
+
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return 1;
+	}
+
+	@Override
+	public boolean isItemValid(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public void putStack(ItemStack stack)
+	{
+		if (!stack.isEmpty())
+		{
+			stack.setCount(1);
+		}
+		super.putStack(stack);
+	}
 
 }
